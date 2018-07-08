@@ -1,0 +1,30 @@
+{
+  "table_entries": [
+    {
+      "table": "_Ingress.ipv4_lpm",
+      "default_action": true,
+      "action_name": "_Ingress.drop",
+      "action_params": {}
+    },
+    {
+      "table": "_Ingress.ipv4_lpm",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.1.1", 32]
+      },
+      "action_name": "_Ingress.ipv4_forward",
+      "action_params": {
+        "port": 1
+      }
+    },
+    {
+      "table": "_Ingress.ipv4_lpm",
+      "match": {
+        "hdr.ipv4.dstAddr": ["10.0.2.2", 32]
+      },
+      "action_name": "_Ingress.ipv4_forward",
+      "action_params": {
+        "port": 2
+      }
+    }
+  ]
+}

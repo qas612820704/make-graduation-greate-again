@@ -5,6 +5,9 @@ all: run
 
 run: build
 
+run-single-switch: build
+	sudo python src/run.py -t src/topo-single_switch.json
+
 build: clean mkdirs $(p4_jsons)
 
 build/%.json: src/%.p4
