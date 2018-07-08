@@ -1,9 +1,11 @@
-
 sources := $(wildcard src/*.p4)
 p4_jsons := $(patsubst src/%.p4, build/%.json,$(sources))
 
+all: run
 
-build: dirs $(p4_jsons)
+run: build
+
+build: clean mkdirs $(p4_jsons)
 
 build/%.json: src/%.p4
 	p4c-bm2-ss --p4v 16 \
@@ -11,5 +13,11 @@ build/%.json: src/%.p4
 		--p4runtime-format text \
 		-o $@ $<
 
-dirs:
-	mkdir -p build pcaps logs
+mkdirs:
+	mkdir -p build/ pcaps/ logs/
+
+stop:
+	sudo mn -c
+
+clean: stop
+	rm -rf build/ pcaps/ logs/
